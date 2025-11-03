@@ -1,0 +1,146 @@
+"use client";
+
+import React from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { FaFacebookF, FaXTwitter, FaWhatsapp } from "react-icons/fa6";
+
+const Footer = () => {
+  return (
+    <footer className="bg-[#075a5a] text-gray-100 py-10 mt-10">
+      {/* Top Section */}
+      <div className="w-[90%] mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-10">
+        {/* Column 1 */}
+        <div>
+          <h3 className="font-semibold mb-3 text-white">Get to know Us</h3>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <Link href="/career" className="hover:underline">Career</Link>
+            </li>
+            <li>
+              <Link href="/about" className="hover:underline">About ReadMore</Link>
+            </li>
+            <li>
+              <Link href="/products" className="hover:underline">Our Products</Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Column 2 */}
+        <div>
+          <h3 className="font-semibold mb-3 text-white">Sell with Us</h3>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <Link href="/sell" className="hover:underline">Sell Product on Britext</Link>
+            </li>
+            <li>
+              <Link href="/advertise" className="hover:underline">Advertise your products</Link>
+            </li>
+            <li>
+              <Link href="/self-publish" className="hover:underline">Self Publish with Britext</Link>
+            </li>
+            <li>
+              <Link href="/products" className="hover:underline">Our Products</Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Column 3 */}
+        <div>
+          <h3 className="font-semibold mb-3 text-white">Our Payment Products</h3>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <Link href="/shop" className="hover:underline">Shop with Britext</Link>
+            </li>
+            <li>
+              <Link href="/business-cards" className="hover:underline">Business Cards</Link>
+            </li>
+            <li>
+              <Link href="/self-publish" className="hover:underline">Self Publish with Britext</Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Column 4 */}
+        <div>
+          <h3 className="font-semibold mb-3 text-white">Help</h3>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <Link href="/account" className="hover:underline">Your Account</Link>
+            </li>
+            <li>
+              <Link href="/orders" className="hover:underline">Your Orders</Link>
+            </li>
+            <li>
+              <Link href="/returns" className="hover:underline">Return and Replacement</Link>
+            </li>
+            <li>
+              <Link href="/help" className="hover:underline">Help</Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Column 5 */}
+        <div className="col-span-2 sm:col-span-3 lg:col-span-1">
+          <h2 className="text-2xl font-semibold text-white mb-2">Britext</h2>
+          <p className="text-sm text-gray-200 leading-relaxed">
+            Britext is an online platform professionally built for all series of items,
+            from books to home accessories. We deliver the best product and sell only quality.
+          </p>
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="border-t border-gray-400 mt-8 pt-4 w-[90%] mx-auto"></div>
+
+      {/* Bottom Section */}
+      <div className="w-[90%] mx-auto flex flex-col sm:flex-row justify-between items-center text-xs text-gray-300 gap-3">
+        <div className="flex flex-wrap justify-center sm:justify-start gap-4">
+          <Link href="/terms" className="hover:underline">Condition of use</Link>
+          <Link href="/privacy" className="hover:underline">Privacy Notice</Link>
+          <Link href="/data-privacy" className="hover:underline">Consumer Health Data Privacy Disclosure</Link>
+          <Link href="/ads-policy" className="hover:underline">Ads Privacy Choice</Link>
+        </div>
+      </div>
+
+      {/* Animated Social Media Icons */}
+      <motion.div
+        className="mt-6 w-[90%] mx-auto flex justify-center sm:justify-end gap-6"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+      >
+        <Link
+          href="https://facebook.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-blue-400 transition-all transform hover:scale-110"
+        >
+          <FaFacebookF size={22} />
+        </Link>
+        <Link
+          href="https://x.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-blue-300 transition-all transform hover:scale-110"
+        >
+          <FaXTwitter size={22} />
+        </Link>
+        <Link
+          href="https://wa.me/1234567890"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-green-400 transition-all transform hover:scale-110"
+        >
+          <FaWhatsapp size={22} />
+        </Link>
+          </motion.div>
+          <p className="text-center sm:text-center">
+          © 2025–2025 Britext Policy, Inc. or its affiliate
+        </p>
+    </footer>
+  );
+};
+
+export default Footer;
