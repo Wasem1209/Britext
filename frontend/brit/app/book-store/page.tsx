@@ -64,7 +64,7 @@ const initialBooks = [
   {
     id: 7,
     title: "Math Without Numbers",
-    author: "M. Eazo",
+    author: "Pastor. Eazo",
     category: "Educational",
     price: 80,
     rating: 3.1,
