@@ -22,14 +22,39 @@ const TrendingPost = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Simulate data fetching
+  const [favorites, setFavorites] = useState<number[]>([]);
+  const [cartItems, setCartItems] = useState<number[]>([]);
+
+  // ⭐ Toggle favorite (heart)
+  const toggleFavorite = (id: number) => {
+    setFavorites((prev) =>
+      prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]
+    );
+  };
+
+  // 🛒 Handle add to cart
+  const handleAddToCart = (id: number) => {
+    setCartItems((prev) =>
+      prev.includes(id) ? prev : [...prev, id]
+    );
+  };
+
+  // ⭐ Handle user rating (simulate update)
+  const handleRating = (id: number, newRating: number) => {
+    setBooks((prevBooks) =>
+      prevBooks.map((book) =>
+        book.id === id ? { ...book, rating: newRating } : book
+      )
+    );
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setBooks([
         {
           id: 1,
-          title: "Decoded- Why Science Behind Why We Buy",
-          author: "Rury Sutherland",
+          title: "Decoded - The Science Behind Why We Buy",
+          author: "Rory Sutherland",
           category: "Fictional",
           oldPrice: 600,
           newPrice: 500,
@@ -67,57 +92,37 @@ const TrendingPost = () => {
           img: "/images/r&g.jpg",
         },
         {
-          id: 5,
-          title: "Lessons from the Titans",
-          author: "Scott Davis - Carter Copeland - Rob Wertheimer",
+          id: 2,
+          title: "Great Economic Thinkers",
+          author: "Jonathan Conlin",
           category: "Fictional",
-          oldPrice: 34000,
-          newPrice: 2600,
-          rating: 6.5,
-          img: "/images/s&s.jpg",
+          oldPrice: 900,
+          newPrice: 670,
+          rating: 3.6,
+          img: "/images/f&p.jpg",
         },
         {
-          id: 6,
-          title: "Military Strategy- A Global History",
-          author: "Jeremy Black",
-          category: "History",
-          oldPrice: null,
-          newPrice: 340,
-          rating: 2.5,
-          img: "/images/restore.jpg",
-        },
-        {
-          id: 7,
-          title: "Septuaginta",
-          author: "Rahlfs Hanhart",
-          category: "Holy Bible",
-          oldPrice: 3500,
-          newPrice: 200,
-          rating: 4.3,
-          img: "/images/spiritual.jpg",
-        },
-        {
-          id: 8,
-          title: "Negotiate Like a CEO",
-          author: "Jonathan S. Stein",
+          id: 2,
+          title: "Great Economic Thinkers",
+          author: "Jonathan Conlin",
           category: "Fictional",
-          oldPrice: null,
-          newPrice: 2000,
-          rating: 2.5,
-          img: "/images/ssc.jpg",
+          oldPrice: 900,
+          newPrice: 670,
+          rating: 3.6,
+          img: "/images/f&p.jpg",
         },
       ]);
       setLoading(false);
-    }, 1500);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
   const handleBookClick = (id: number) => {
-    router.push(`/book-store/${id}`); // Navigate to book details page
+    router.push(`/book-store/${id}`);
   };
 
   const handleViewAll = () => {
-    router.push("/book-store"); // Navigate to book store
+    router.push("/book-store");
   };
 
   return (
@@ -134,15 +139,14 @@ const TrendingPost = () => {
       </div>
 
       {/* Books Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
         {loading
-          ? // 🔷 Loading shimmer animation
-            Array.from({ length: 8 }).map((_, index) => (
+          ? Array.from({ length: 4 }).map((_, index) => (
               <div
                 key={index}
                 className="animate-pulse bg-white rounded-xl shadow-md overflow-hidden border border-gray-100"
               >
-                <div className="h-52 bg-gray-200 w-full"></div>
+                <div className="h-44 bg-gray-200 w-full"></div>
                 <div className="p-3 space-y-3">
                   <div className="h-3 bg-gray-200 rounded w-3/4"></div>
                   <div className="h-3 bg-gray-200 rounded w-1/2"></div>
@@ -151,76 +155,115 @@ const TrendingPost = () => {
                 </div>
               </div>
             ))
-          : // 🔹 Loaded books
-            books.map((book) => (
-              <motion.div
-                key={book.id}
-                className="bg-white rounded-xl shadow-md hover:shadow-lg overflow-hidden relative cursor-pointer border border-gray-100"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <div onClick={() => handleBookClick(book.id)}>
-                  {/* Book Image */}
-                  <div className="relative w-full h-52">
-                    <Image
-                      src={book.img}
-                      alt={book.title}
-                      fill
-                      className="object-cover"
-                    />
-                    {/* Favorite icon */}
-                    <button
-                      className="absolute top-2 right-2 bg-white/80 rounded-full p-1 hover:bg-white"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <Heart
-                        size={16}
-                        className="text-gray-500 hover:text-red-500"
+          : books.map((book) => {
+              const isFavorited = favorites.includes(book.id);
+              const isInCart = cartItems.includes(book.id);
+
+              return (
+                <motion.div
+                  key={book.id}
+                  className="bg-white rounded-xl shadow-md hover:shadow-lg overflow-hidden relative cursor-pointer border border-gray-100 transition-all duration-200 max-w-[300px] mx-auto"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <div onClick={() => handleBookClick(book.id)}>
+                    {/* Book Image */}
+                    <div className="relative w-full h-44">
+                      <Image
+                        src={book.img}
+                        alt={book.title}
+                        fill
+                        className="object-contain bg-gray-50"
                       />
-                    </button>
-                  </div>
-
-                  {/* Book Info */}
-                  <div className="p-3">
-                    <p className="text-xs text-gray-500 mb-1">
-                      {book.category} –{" "}
-                      <span className="text-gray-700">{book.author}</span>
-                    </p>
-                    <h3 className="text-sm font-semibold line-clamp-2">
-                      {book.title}
-                    </h3>
-
-                    {/* Rating */}
-                    <p className="text-yellow-500 text-xs mt-1">
-                      ⭐ {book.rating}
-                    </p>
-
-                    {/* Price */}
-                    <div className="flex items-center gap-2 mt-2">
-                      {book.oldPrice && (
-                        <span className="text-gray-400 line-through text-xs">
-                          ${book.oldPrice}
-                        </span>
-                      )}
-                      <span className="text-black font-semibold text-sm">
-                        ${book.newPrice}
-                      </span>
+                      {/* Favorite icon */}
+                      <button
+                        className="absolute top-2 right-2 bg-white/80 rounded-full p-1 hover:bg-white transition"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleFavorite(book.id);
+                        }}
+                      >
+                        <Heart
+                          size={18}
+                          fill={isFavorited ? "#FFD700" : "none"}
+                          className={`${
+                            isFavorited
+                              ? "text-yellow-400"
+                              : "text-gray-500 hover:text-yellow-500"
+                          }`}
+                        />
+                      </button>
                     </div>
 
-                    {/* Add to cart button */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        alert(`Added "${book.title}" to cart`);
-                      }}
-                      className="mt-3 w-full flex items-center justify-center gap-2 bg-blue-600 text-white text-sm py-2 rounded-lg hover:bg-blue-700 transition"
-                    >
-                      Add to cart <ShoppingCart size={16} />
-                    </button>
+                    {/* Book Info */}
+                    <div className="p-3">
+                      <p className="text-xs text-gray-500 mb-1">
+                        {book.category} –{" "}
+                        <span className="text-gray-700">{book.author}</span>
+                      </p>
+                      <h3 className="text-sm font-semibold line-clamp-2">
+                        {book.title}
+                      </h3>
+
+                      {/* ⭐ Rating (clickable) */}
+                      <div className="flex items-center gap-1 mt-2">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <button
+                            key={star}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleRating(book.id, star);
+                            }}
+                          >
+                            <span
+                              className={`text-sm ${
+                                star <= Math.round(book.rating)
+                                  ? "text-yellow-500"
+                                  : "text-gray-300"
+                              }`}
+                            >
+                              ★
+                            </span>
+                          </button>
+                        ))}
+                        <span className="text-xs text-gray-500 ml-1">
+                          {book.rating.toFixed(1)}
+                        </span>
+                      </div>
+
+                      {/* Price */}
+                      <div className="flex items-center gap-2 mt-2">
+                        {book.oldPrice && (
+                          <span className="text-gray-400 line-through text-xs">
+                            ${book.oldPrice}
+                          </span>
+                        )}
+                        <span className="text-black font-semibold text-sm">
+                          ${book.newPrice}
+                        </span>
+                      </div>
+
+                      {/* 🛒 Add to cart */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleAddToCart(book.id);
+                        }}
+                        className={`mt-3 w-full flex items-center justify-center gap-2 text-sm py-1.5 rounded-lg transition ${
+                          isInCart
+                            ? "bg-gray-400 text-white cursor-not-allowed"
+                            : "bg-blue-600 text-white hover:bg-blue-700"
+                        }`}
+                        disabled={isInCart}
+                      >
+                        {isInCart ? "Added to Cart" : "Add to Cart"}{" "}
+                        <ShoppingCart size={16} />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
       </div>
     </section>
   );
