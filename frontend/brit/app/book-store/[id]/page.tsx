@@ -6,13 +6,10 @@ import { ShoppingCart, ArrowLeft, Star } from "lucide-react";
 import Link from "next/link";
 import SimilarPost from "@/app/Components/SimilarPost";
 
-
 export default function BookDetails() {
-  const [quantity, setQuantity] = useState(1);
-  const [rating, setRating] = useState(2.5); // Default rating
+  const [rating, setRating] = useState(2.5);
   const [hoverRating, setHoverRating] = useState<number | null>(null);
 
-  // Handle star click
   const handleRatingClick = (value: number) => setRating(value);
   const handleMouseEnter = (value: number) => setHoverRating(value);
   const handleMouseLeave = () => setHoverRating(null);
@@ -26,7 +23,7 @@ export default function BookDetails() {
         </p>
 
         <Link
-          href="/book-store[id]"
+          href="/book-store"
           className="flex items-center gap-1 text-sky-600 hover:underline text-sm"
         >
           <ArrowLeft size={16} />
@@ -35,15 +32,21 @@ export default function BookDetails() {
       </div>
 
       <div className="flex flex-col md:flex-row gap-10">
-        {/* Book Cover */}
+        {/* ✅ Book Cover Card */}
         <div className="flex-shrink-0 flex justify-center md:justify-start">
-          <Image
-            src="/images/ssc.jpg" // replace with actual image path
-            alt="Decoded book cover"
-            width={500}
-            height={20}
-            className="rounded-lg shadow-md object-cover"
-          />
+          <div
+            className="flex justify-center items-center bg-gray-50 rounded-xl p-6 shadow-sm border border-gray-100
+            h-auto md:h-[22rem] lg:h-[24rem] transition-all duration-300"
+          >
+            <div className="relative w-40 h-56 md:w-52 md:h-72 rounded-md shadow-md overflow-hidden border border-gray-200 bg-white">
+              <Image
+                src="/images/ssc.jpg"
+                alt="Decoded book cover"
+                fill
+                className="object-cover rounded-md"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Book Details */}
@@ -60,7 +63,7 @@ export default function BookDetails() {
             Edition : Paper & bak illustrated, November 2, 2023
           </p>
 
-          {/* Interactive Ratings */}
+          {/* Ratings */}
           <div className="flex items-center gap-1 text-yellow-400">
             {[1, 2, 3, 4, 5].map((star) => (
               <button
@@ -72,24 +75,21 @@ export default function BookDetails() {
               >
                 <Star
                   size={20}
-                  fill={
-                    (hoverRating || rating) >= star ? "currentColor" : "none"
-                  }
+                  fill={(hoverRating || rating) >= star ? "currentColor" : "none"}
                   stroke="currentColor"
                   className="transition-transform duration-200 hover:scale-110"
                 />
               </button>
             ))}
             <span className="text-gray-600 text-sm ml-2">
-              {rating.toFixed(1)}{" "}
-              <span className="text-gray-400">(Ratings)</span>
+              {rating.toFixed(1)} <span className="text-gray-400">(Ratings)</span>
             </span>
           </div>
 
           {/* Price */}
           <div className="flex items-center gap-3">
-            <span className="text-gray-400 line-through text-lg">₦7500</span>
-            <span className="text-2xl font-bold text-sky-700">₦5000</span>
+            <span className="text-gray-400 line-through text-lg">$7500</span>
+            <span className="text-2xl font-bold text-sky-700">$5000</span>
             <span className="bg-yellow-400 text-xs px-2 py-1 rounded-md font-semibold">
               Discount
             </span>
@@ -119,13 +119,13 @@ export default function BookDetails() {
             </p>
           </div>
 
-          {/* Action Buttons */}
+          {/* Buttons */}
           <div className="flex flex-wrap items-center gap-3 pt-4">
             <button className="px-5 py-2 border border-sky-600 text-sky-600 rounded-full hover:bg-sky-50">
               Read summary
             </button>
             <button className="px-5 py-2 border border-sky-600 text-sky-600 rounded-full hover:bg-sky-50">
-              Borrow book
+              Buy now
             </button>
             <button className="px-5 py-2 border border-gray-300 text-gray-600 rounded-full hover:bg-gray-100">
               Save for later
@@ -139,20 +139,10 @@ export default function BookDetails() {
               Add to cart
             </button>
 
-            <div className="flex items-center gap-2">
-              <label className="text-gray-600 font-medium">Quantity:</label>
-                <input
-                              aria-label="number"
-                type="number"
-                value={quantity}
-                min={1}
-                onChange={(e) => setQuantity(Number(e.target.value))}
-                className="w-16 border border-gray-300 rounded-md px-2 py-1 text-center"
-              />
-            </div>
+            
           </div>
 
-          {/* Extra Book Info */}
+          {/* Extra Info */}
           <div className="pt-8 border-t mt-6 text-gray-700 text-sm grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <p className="font-semibold">Print Length</p>
@@ -181,10 +171,10 @@ export default function BookDetails() {
       {/* Author Section */}
       <div className="flex items-center gap-3 pt-10 border-t mt-10">
         <Image
-          src="/images/chigozie-removebg-preview.png" // replace with actual image path
+          src="/images/chigozie-removebg-preview (1).png"
           alt="Phil Barden"
-          width={45}
-          height={45}
+          width={80}
+          height={70}
           className="rounded-full object-cover"
         />
         <div>
@@ -192,6 +182,7 @@ export default function BookDetails() {
           <p className="text-gray-500 text-sm">Author</p>
         </div>
       </div>
+
       <SimilarPost />
     </section>
   );

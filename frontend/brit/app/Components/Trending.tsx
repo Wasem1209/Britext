@@ -21,14 +21,15 @@ const TrendingPost = () => {
   const router = useRouter();
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
-
   const [favorites, setFavorites] = useState<number[]>([]);
   const [cartItems, setCartItems] = useState<number[]>([]);
 
-  // ⭐ Toggle favorite (heart)
+  // ⭐ Toggle favorite
   const toggleFavorite = (id: number) => {
     setFavorites((prev) =>
-      prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]
+      prev.includes(id)
+        ? prev.filter((favId) => favId !== id)
+        : [...prev, id]
     );
   };
 
@@ -39,7 +40,7 @@ const TrendingPost = () => {
     );
   };
 
-  // ⭐ Handle user rating (simulate update)
+  // ⭐ Handle rating (simulate update)
   const handleRating = (id: number, newRating: number) => {
     setBooks((prevBooks) =>
       prevBooks.map((book) =>
@@ -92,24 +93,24 @@ const TrendingPost = () => {
           img: "/images/r&g.jpg",
         },
         {
-          id: 2,
-          title: "Great Economic Thinkers",
+          id: 5,
+          title: "Creative Thinking",
           author: "Jonathan Conlin",
           category: "Fictional",
-          oldPrice: 900,
-          newPrice: 670,
-          rating: 3.6,
+          oldPrice: 700,
+          newPrice: 550,
+          rating: 3.9,
           img: "/images/f&p.jpg",
         },
         {
-          id: 2,
-          title: "Great Economic Thinkers",
-          author: "Jonathan Conlin",
+          id: 6,
+          title: "Unlocking Negotiation Skills",
+          author: "Roger Dawson",
           category: "Fictional",
-          oldPrice: 900,
-          newPrice: 670,
-          rating: 3.6,
-          img: "/images/f&p.jpg",
+          oldPrice: 800,
+          newPrice: 620,
+          rating: 4.4,
+          img: "/images/r&g.jpg",
         },
       ]);
       setLoading(false);
@@ -129,7 +130,7 @@ const TrendingPost = () => {
     <section className="w-[90%] mx-auto mt-15 py-2">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-3xl font-bold text-gray-800">Trending post</h2>
+        <h2 className="text-3xl font-bold text-gray-800">Trending Post</h2>
         <button
           onClick={handleViewAll}
           className="text-blue-600 hover:underline text-sm font-semibold"
@@ -139,7 +140,7 @@ const TrendingPost = () => {
       </div>
 
       {/* Books Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {loading
           ? Array.from({ length: 4 }).map((_, index) => (
               <div
@@ -162,104 +163,110 @@ const TrendingPost = () => {
               return (
                 <motion.div
                   key={book.id}
-                  className="bg-white rounded-xl shadow-md hover:shadow-lg overflow-hidden relative cursor-pointer border border-gray-100 transition-all duration-200 max-w-[300px] mx-auto"
-                  whileHover={{ scale: 1.05 }}
+                  className="bg-white rounded-xl shadow-sm hover:shadow-md overflow-hidden relative cursor-pointer border border-gray-200 transition-all duration-200"
+                  whileHover={{ scale: 1.03 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div onClick={() => handleBookClick(book.id)}>
-                    {/* Book Image */}
-                    <div className="relative w-full h-44">
-                      <Image
-                        src={book.img}
-                        alt={book.title}
-                        fill
-                        className="object-contain bg-gray-50"
-                      />
-                      {/* Favorite icon */}
-                      <button
-                        className="absolute top-2 right-2 bg-white/80 rounded-full p-1 hover:bg-white transition"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleFavorite(book.id);
-                        }}
-                      >
-                        <Heart
-                          size={18}
-                          fill={isFavorited ? "#FFD700" : "none"}
-                          className={`${
-                            isFavorited
-                              ? "text-yellow-400"
-                              : "text-gray-500 hover:text-yellow-500"
-                          }`}
-                        />
-                      </button>
-                    </div>
+                <div
+  onClick={() => handleBookClick(book.id)}
+  className="relative flex justify-center items-center py-6 bg-gradient-to-b from-gray-50 to-gray-100"
+>
+  <div className="relative w-32 h-44 md:w-40 md:h-56">
+    <Image
+      src={book.img}
+      alt={book.title}
+      fill
+      className="object-cover rounded-md shadow-[0_10px_20px_rgba(0,0,0,0.15)] border border-gray-200"
+    />
+  </div>
 
-                    {/* Book Info */}
-                    <div className="p-3">
-                      <p className="text-xs text-gray-500 mb-1">
-                        {book.category} –{" "}
-                        <span className="text-gray-700">{book.author}</span>
-                      </p>
-                      <h3 className="text-sm font-semibold line-clamp-2">
-                        {book.title}
-                      </h3>
+  {/* Subtle floor shadow effect */}
+  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-24 h-2 bg-gray-400/40 blur-md rounded-full"></div>
 
-                      {/* ⭐ Rating (clickable) */}
-                      <div className="flex items-center gap-1 mt-2">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <button
-                            key={star}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleRating(book.id, star);
-                            }}
+  {/* Favorite icon */}
+  <button
+    className="absolute top-3 right-3 bg-white/80 rounded-full p-1 hover:bg-white transition"
+    onClick={(e) => {
+      e.stopPropagation();
+      toggleFavorite(book.id);
+    }}
+  >
+    <Heart
+      size={18}
+      fill={isFavorited ? "#FFD700" : "none"}
+      className={`${
+        isFavorited
+          ? "text-yellow-400"
+          : "text-gray-500 hover:text-yellow-500"
+      }`}
+    />
+  </button>
+</div>
+
+                  {/* Book Info */}
+                  <div className="p-4">
+                    <p className="text-xs text-gray-500 mb-1">
+                      {book.category} –{" "}
+                      <span className="text-gray-700">{book.author}</span>
+                    </p>
+                    <h3 className="text-sm font-semibold text-gray-900 line-clamp-2">
+                      {book.title}
+                    </h3>
+
+                    {/* Rating */}
+                    <div className="flex items-center gap-1 mt-2">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <button
+                          key={star}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleRating(book.id, star);
+                          }}
+                        >
+                          <span
+                            className={`text-sm ${
+                              star <= Math.round(book.rating)
+                                ? "text-yellow-500"
+                                : "text-gray-300"
+                            }`}
                           >
-                            <span
-                              className={`text-sm ${
-                                star <= Math.round(book.rating)
-                                  ? "text-yellow-500"
-                                  : "text-gray-300"
-                              }`}
-                            >
-                              ★
-                            </span>
-                          </button>
-                        ))}
-                        <span className="text-xs text-gray-500 ml-1">
-                          {book.rating.toFixed(1)}
-                        </span>
-                      </div>
-
-                      {/* Price */}
-                      <div className="flex items-center gap-2 mt-2">
-                        {book.oldPrice && (
-                          <span className="text-gray-400 line-through text-xs">
-                            ${book.oldPrice}
+                            ★
                           </span>
-                        )}
-                        <span className="text-black font-semibold text-sm">
-                          ${book.newPrice}
-                        </span>
-                      </div>
-
-                      {/* 🛒 Add to cart */}
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleAddToCart(book.id);
-                        }}
-                        className={`mt-3 w-full flex items-center justify-center gap-2 text-sm py-1.5 rounded-lg transition ${
-                          isInCart
-                            ? "bg-gray-400 text-white cursor-not-allowed"
-                            : "bg-blue-600 text-white hover:bg-blue-700"
-                        }`}
-                        disabled={isInCart}
-                      >
-                        {isInCart ? "Added to Cart" : "Add to Cart"}{" "}
-                        <ShoppingCart size={16} />
-                      </button>
+                        </button>
+                      ))}
+                      <span className="text-xs text-gray-500 ml-1">
+                        {book.rating.toFixed(1)}
+                      </span>
                     </div>
+
+                    {/* Price */}
+                    <div className="flex items-center gap-2 mt-2">
+                      {book.oldPrice && (
+                        <span className="text-gray-400 line-through text-xs">
+                          ${book.oldPrice}
+                        </span>
+                      )}
+                      <span className="text-black font-semibold text-sm">
+                        ${book.newPrice}
+                      </span>
+                    </div>
+
+                    {/* Add to Cart */}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleAddToCart(book.id);
+                      }}
+                      className={`mt-3 w-full flex items-center justify-center gap-2 text-sm py-2 rounded-md transition ${
+                        isInCart
+                          ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                          : "bg-sky-500 hover:bg-sky-600 text-white"
+                      }`}
+                      disabled={isInCart}
+                    >
+                      {isInCart ? "Added to Cart" : "Add to Cart"}{" "}
+                      <ShoppingCart size={16} />
+                    </button>
                   </div>
                 </motion.div>
               );
