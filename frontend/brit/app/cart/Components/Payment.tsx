@@ -2,15 +2,15 @@
 
 import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
-import Image from "next/image";
+import { FaPaypal, FaCcVisa, FaCcMastercard } from "react-icons/fa";
 
-const Payment = ({
-  onNext,
-  onBack,
-}: {
+// ✅ Define the prop types
+interface PaymentProps {
   onNext?: () => void;
   onBack?: () => void;
-}) => {
+}
+
+const Payment: React.FC<PaymentProps> = ({ onNext, onBack }) => {
   const [method, setMethod] = useState<"paypal" | "credit">("credit");
 
   return (
@@ -67,13 +67,7 @@ const Payment = ({
               Paypal account is not necessary.
             </p>
           </div>
-          <Image
-                      src="/paypal-logo.png"
-                      width={30}
-                      height={30}
-            alt="PayPal"
-            className="w-16 h-auto object-contain"
-          />
+          <FaPaypal size={40} className="text-[#003087]" />
         </div>
 
         {/* Credit Card */}
@@ -101,60 +95,13 @@ const Payment = ({
                 Verve.
               </p>
             </div>
-            <div className="flex gap-2">
-                          <Image src=""
-                              alt="Visa" className="w-10 h-auto" />
-                          <Image src="/mastercard.png"
-                              width={30} height={30} alt="MasterCard" className="w-10 h-auto" />
+            <div className="flex gap-2 items-center">
+              <FaCcVisa size={40} className="text-[#1A1F71]" />
+              <FaCcMastercard size={40} className="text-[#EB001B]" />
             </div>
           </div>
         </div>
       </div>
-
-      {/* Card Form */}
-      {method === "credit" && (
-        <form className="mt-8 space-y-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div>
-              <label className="text-sm font-medium text-gray-700">Card Name</label>
-              <input
-                type="text"
-                placeholder="Card Name"
-                className="w-full mt-2 border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#035b77]"
-              />
-            </div>
-            <div>
-              <label className="text-sm font-medium text-gray-700">
-                Credit Card Number
-              </label>
-              <input
-                type="text"
-                placeholder="Enter card number"
-                className="w-full mt-2 border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#035b77]"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div>
-              <label className="text-sm font-medium text-gray-700">CVV</label>
-              <input
-                type="text"
-                placeholder="CVV Code"
-                className="w-full mt-2 border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#035b77]"
-              />
-            </div>
-            <div>
-              <label className="text-sm font-medium text-gray-700">Expiry Date</label>
-              <input
-                type="text"
-                placeholder="DD/MM/YY"
-                className="w-full mt-2 border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#035b77]"
-              />
-            </div>
-          </div>
-        </form>
-      )}
 
       {/* Pay Button */}
       <div className="mt-10 flex justify-end">
