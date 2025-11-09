@@ -3,6 +3,8 @@ import "./globals.css";
 import Hero from "./Components/Hero";
 import Trending from "./Components/Trending";
 import ShoppingExperience from "./Components/ShoppingExperience";
+import OtherBooks from "./Components/OtherBooks";
+
 
 export const metadata = {
   title: "Fast Book Shopping",
@@ -20,6 +22,7 @@ export default function RootLayout({
         <Hero />
         <Trending />
         <ShoppingExperience />
+        <OtherBooks />
         {children}
       </body>
     </html>

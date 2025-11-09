@@ -117,7 +117,7 @@ const BookStore = () => {
   const [cart, setCart] = useState<number[]>([]);
   const [wishlist, setWishlist] = useState<number[]>([]);
 
-  //  Add to cart
+  // Add to cart
   const handleAddToCart = (bookId: number) => {
     setCart((prev) => [...prev, bookId]);
   };
@@ -154,7 +154,7 @@ const BookStore = () => {
   return (
     <div className="p-4 md:p-8 lg:p-12 bg-white min-h-screen">
       {/* Header */}
-      <h1 className="text-3xl font-semibold mb-6 text-gray-900">Book Store</h1>
+      <h1 className="text-3xl font-semibold mb-6 text-gray-900">Other Books</h1>
 
       {/* Category Tabs */}
       <div className="flex flex-wrap gap-3 mb-8">
