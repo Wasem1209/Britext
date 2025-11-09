@@ -232,7 +232,7 @@ export default function BookDetails() {
 
       {/* ✅ Discount Modal */}
       {isDiscountModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-gray-100 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white rounded-xl p-6 w-80 max-w-full">
             <h2 className="text-lg font-semibold mb-4">Input Discount Code</h2>
             <input
@@ -262,7 +262,7 @@ export default function BookDetails() {
 
       {/* ✅ Summary Modal */}
       {isSummaryModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-gray-100 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white rounded-xl p-6 w-96 max-w-full">
             <h2 className="text-lg font-semibold mb-4">Book Summary</h2>
             <div className="text-gray-700 text-sm space-y-2 max-h-80 overflow-y-auto">
