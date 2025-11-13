@@ -4,6 +4,9 @@ import Hero from "./Components/Hero";
 import Trending from "./Components/Trending";
 import ShoppingExperience from "./Components/ShoppingExperience";
 import OtherBooks from "./Components/OtherBooks";
+import Testmonial from "./Components/Testmonial";
+import SubscribeSection from "./Components/SubscribeSection";
+import CommentSection from "./Components/CommentSection";
 
 
 export const metadata = {
@@ -24,6 +27,9 @@ export default function RootLayout({
         <ShoppingExperience />
         <OtherBooks />
         {children}
+        <Testmonial />
+        <SubscribeSection />
+        <CommentSection />
       </body>
     </html>
   );
