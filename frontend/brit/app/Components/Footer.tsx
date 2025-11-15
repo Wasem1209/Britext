@@ -18,7 +18,7 @@ const Footer = () => {
               <Link href="/career" className="hover:underline">Career</Link>
             </li>
             <li>
-              <Link href="/about" className="hover:underline">About ReadMore</Link>
+              <Link href="/about" className="hover:underline">About BriText</Link>
             </li>
             <li>
               <Link href="/products" className="hover:underline">Our Products</Link>
@@ -31,16 +31,10 @@ const Footer = () => {
           <h3 className="font-semibold mb-3 text-white">Sell with Us</h3>
           <ul className="space-y-2 text-sm">
             <li>
-              <Link href="/sell" className="hover:underline">Sell Product on Britext</Link>
-            </li>
-            <li>
               <Link href="/advertise" className="hover:underline">Advertise your products</Link>
             </li>
             <li>
               <Link href="/self-publish" className="hover:underline">Self Publish with Britext</Link>
-            </li>
-            <li>
-              <Link href="/products" className="hover:underline">Our Products</Link>
             </li>
           </ul>
         </div>
@@ -50,13 +44,7 @@ const Footer = () => {
           <h3 className="font-semibold mb-3 text-white">Our Payment Products</h3>
           <ul className="space-y-2 text-sm">
             <li>
-              <Link href="/shop" className="hover:underline">Shop with Britext</Link>
-            </li>
-            <li>
-              <Link href="/business-cards" className="hover:underline">Business Cards</Link>
-            </li>
-            <li>
-              <Link href="/self-publish" className="hover:underline">Self Publish with Britext</Link>
+              <Link href="/pay" className="hover:underline">Payment with Britext</Link>
             </li>
           </ul>
         </div>
@@ -66,14 +54,9 @@ const Footer = () => {
           <h3 className="font-semibold mb-3 text-white">Help</h3>
           <ul className="space-y-2 text-sm">
             <li>
-              <Link href="/account" className="hover:underline">Your Account</Link>
+              <Link href="/contact Us" className="hover:underline">Contact Us</Link>
             </li>
-            <li>
-              <Link href="/orders" className="hover:underline">Your Orders</Link>
-            </li>
-            <li>
-              <Link href="/returns" className="hover:underline">Return and Replacement</Link>
-            </li>
+           
             <li>
               <Link href="/help" className="hover:underline">Help</Link>
             </li>

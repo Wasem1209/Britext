@@ -33,20 +33,20 @@ const Hero = () => {
 
           {/* BUTTONS */}
           <motion.div
-            className="flex items-center gap-4 pt-6 flex-wrap"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
-          >
+  className="flex items-center gap-4 pt-6 flex-wrap"
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 1, delay: 0.6 }}
+>
+  <motion.button
+    whileHover={{ scale: 1.05 }}
+    className="border border-white hover:bg-white hover:text-[#035b77] font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base transition-all duration-300 flex items-center gap-2"
+    onClick={() => window.location.href = "/book-store"} // <- Navigate to the page
+  >
+    Explore Book
+  </motion.button>
+</motion.div>
 
-            <motion.button
-              
-              whileHover={{ scale: 1.05 }}
-              className="border border-white hover:bg-white hover:text-[#035b77] font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base transition-all duration-300 flex items-center gap-2"
-            >
-              Explore Book
-            </motion.button>
-          </motion.div>
         </div>
 
         {/*  IMAGE SECTION  */}

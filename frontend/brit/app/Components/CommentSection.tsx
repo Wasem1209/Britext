@@ -63,7 +63,7 @@ const CommentSection = () => {
           Share Your Thoughts 💬
         </h2>
         <p className="text-gray-600 mt-2 text-sm md:text-base">
-          Leave a comment about your experience with ReadMore. Your feedback helps others
+          Leave a comment about your experience with BriText. Your feedback helps others
           discover more.
         </p>
       </motion.div>

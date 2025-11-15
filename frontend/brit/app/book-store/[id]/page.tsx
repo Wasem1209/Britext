@@ -7,6 +7,7 @@ import Link from "next/link";
 import SimilarPost from "@/app/Components/SimilarPost";
 import AboutAuthor from "@/app/Components/AboutAuthor";
 import { useRouter } from "next/navigation";
+import CommentSection from "@/app/Components/CommentSection";
 
 export default function BookDetails() {
   const [rating, setRating] = useState(2.5);
@@ -33,8 +34,9 @@ export default function BookDetails() {
 
   // Buy Now redirects to payment page directly
   const handleBuyNow = () => {
-    router.push("/cart/payment");
-  };
+  router.push("/payment");
+};
+
 
   // Add to cart toggles state
   const handleAddToCart = () => {
@@ -139,13 +141,14 @@ export default function BookDetails() {
               Read summary
             </button>
 
-            {/*  Buy Now */}
-            <button
-              onClick={handleBuyNow}
-              className="px-5 py-2 border border-sky-600 text-sky-600 rounded-full hover:bg-sky-50"
-            >
-              Buy now
-            </button>
+           {/* Buy Now */}
+<button
+  onClick={handleBuyNow}
+  className="px-5 py-2 border border-sky-600 text-sky-600 rounded-full hover:bg-sky-50"
+>
+  Buy now
+</button>
+
 
             {/*  Save for later */}
             <button
@@ -230,9 +233,9 @@ export default function BookDetails() {
       <SimilarPost />
       <AboutAuthor />
 
-      {/* ✅ Discount Modal */}
+      {/* Discount Modal */}
       {isDiscountModalOpen && (
-        <div className="fixed inset-0 bg-gray-100 bg-opacity-50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white rounded-xl p-6 w-80 max-w-full">
             <h2 className="text-lg font-semibold mb-4">Input Discount Code</h2>
             <input
@@ -260,9 +263,9 @@ export default function BookDetails() {
         </div>
       )}
 
-      {/* ✅ Summary Modal */}
+      {/*  Summary Modal */}
       {isSummaryModalOpen && (
-        <div className="fixed inset-0 bg-gray-100 bg-opacity-50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white rounded-xl p-6 w-96 max-w-full">
             <h2 className="text-lg font-semibold mb-4">Book Summary</h2>
             <div className="text-gray-700 text-sm space-y-2 max-h-80 overflow-y-auto">
@@ -298,6 +301,7 @@ export default function BookDetails() {
           </div>
         </div>
       )}
+      <CommentSection />
     </section>
   );
 }

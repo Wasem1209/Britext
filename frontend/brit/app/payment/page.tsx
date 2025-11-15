@@ -4,13 +4,13 @@ import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { FaPaypal, FaCcVisa, FaCcMastercard } from "react-icons/fa";
 
-// ✅ Define the prop types
+// Define the prop types
 interface PaymentProps {
   onNext?: () => void;
   onBack?: () => void;
 }
 
-const Payment: React.FC<PaymentProps> = ({ onNext, onBack }) => {
+const Payment: React.FC<PaymentProps> = ({ onBack }) => {
   const [method, setMethod] = useState<"paypal" | "credit">("credit");
 
   return (
@@ -103,17 +103,20 @@ const Payment: React.FC<PaymentProps> = ({ onNext, onBack }) => {
         </div>
       </div>
 
-      {/* Pay Button */}
-      <div className="mt-10 flex justify-end">
-        <button
-          onClick={onNext}
-          className="bg-[#035b77] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#02485d] transition"
-        >
-          Pay Now →
-        </button>
-      </div>
+     {/* Pay Button */}
+<div className="mt-10 flex justify-end">
+  <button
+    onClick={() => window.location.href = "/cofirmation"} // <-- correct path
+    className="bg-[#035b77] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#02485d] transition"
+  >
+    Pay Now →
+  </button>
+</div>
+
+
+      
+      
     </div>
   );
 };
-
 export default Payment;
