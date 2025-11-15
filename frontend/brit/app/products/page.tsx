@@ -63,7 +63,7 @@ export default function ProductsPage() {
           <p className="text-gray-700 mb-6">
             We’re working hard to bring you more digital resources to make your learning journey seamless. Stay tuned for our upcoming releases.
           </p>
-          <Link href="/contact">
+          <Link href="/app">
             <button className="px-6 py-3 bg-sky-600 text-white rounded-2xl shadow-md hover:bg-sky-700 transition-all">
               Check Here
             </button>
