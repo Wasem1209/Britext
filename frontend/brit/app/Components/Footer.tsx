@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaFacebookF, FaXTwitter, FaWhatsapp } from "react-icons/fa6";
+import { FaFacebookF, FaWhatsapp, FaTiktok } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -76,15 +76,7 @@ const Footer = () => {
       {/* Divider */}
       <div className="border-t border-gray-400 mt-8 pt-4 w-[90%] mx-auto"></div>
 
-      {/* Bottom Section */}
-      <div className="w-[90%] mx-auto flex flex-col sm:flex-row justify-between items-center text-xs text-gray-300 gap-3">
-        <div className="flex flex-wrap justify-center sm:justify-start gap-4">
-          <Link href="/terms" className="hover:underline">Condition of use</Link>
-          <Link href="/privacy" className="hover:underline">Privacy Notice</Link>
-          <Link href="/data-privacy" className="hover:underline">Consumer Health Data Privacy Disclosure</Link>
-          <Link href="/ads-policy" className="hover:underline">Ads Privacy Choice</Link>
-        </div>
-      </div>
+      
 
       {/* Animated Social Media Icons */}
       <motion.div
@@ -95,7 +87,7 @@ const Footer = () => {
         viewport={{ once: true }}
       >
         <Link
-          href="https://facebook.com"
+          href="https://www.facebook.com/share/17RSMUKvps/"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-blue-400 transition-all transform hover:scale-110"
@@ -103,15 +95,17 @@ const Footer = () => {
           <FaFacebookF size={22} />
         </Link>
         <Link
-          href="https://x.com"
+          href="https://www.tiktok.com/@dividingthewordoftruth?_r=1&_t=ZM-91TOPXFSUZM
+"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-blue-300 transition-all transform hover:scale-110"
         >
-          <FaXTwitter size={22} />
+          <FaTiktok size={22} />
         </Link>
         <Link
-          href="https://wa.me/1234567890"
+          href="https://youtube.com/@dividingthewordoftruthtv?si=H9fGQcYaEfoL0OIb
+"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-green-400 transition-all transform hover:scale-110"
